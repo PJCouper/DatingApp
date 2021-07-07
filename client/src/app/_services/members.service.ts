@@ -39,6 +39,16 @@ export class MembersService {
     return this.userParams;
   }
 
+  addLike(username: string) {
+    return this.http.post(this.baseUrl + 'likes/' + username, {});
+  }
+
+  getLikes(predicate: string, pageNumber, pageSize) {
+    let params = this.getPaginationHeaders(pageNumber, pageSize);
+    params = params.append('predicate', predicate);
+    return this.getPaginatedResults<Partial<Member[]>>(this.baseUrl + 'likes', params);
+  }
+
   getMembers(userParams : UserParams) {
     var response = this.memberCache.get(Object.values(userParams).join('-'));
     if (response) {
@@ -103,10 +113,10 @@ export class MembersService {
   }
 
   setMainPhoto(photoId: number) {
-  return this.http.put(this.baseUrl + 'users/set-main-photo/' + photoId, {});
+    return this.http.put(this.baseUrl + 'users/set-main-photo/' + photoId, {});
   }
 
   deletePhoto(photoId: number) {
-  return this.http.delete(this.baseUrl + 'users/delete-photo/' + photoId);
+    return this.http.delete(this.baseUrl + 'users/delete-photo/' + photoId);
   }
 }

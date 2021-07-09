@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using API.Helpers;
-using API.Interface;
+using API.Interfaces;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Http;
@@ -13,7 +13,7 @@ namespace API.Services
         private readonly Cloudinary _cloudinary;
         public PhotoService(IOptions<CloudinarySettings> config)
         {
-            var acc = new Account   
+            var acc = new Account
             (
                 config.Value.CloudName,
                 config.Value.ApiKey,

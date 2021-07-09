@@ -18,8 +18,9 @@ export class ListsComponent implements OnInit {
   constructor(private memberService: MembersService) { }
 
   ngOnInit(): void {
+    this.loadLikes();
   }
-
+  
   loadLikes() {
     this.memberService.getLikes(this.predicate, this.pageNumber, this.pageSize).subscribe(response => {
       this.members = response.result;
@@ -31,4 +32,5 @@ export class ListsComponent implements OnInit {
     this.pageNumber = event.page;
     this.loadLikes();
   }
+
 }
